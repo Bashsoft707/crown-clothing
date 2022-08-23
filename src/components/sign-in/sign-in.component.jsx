@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
 
@@ -15,9 +16,14 @@ export const SignInForm = () => {
     setFormFields(initialFormFields);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formFields);
+
+    const res = await axios.post(
+      "http://localhost:5000/api/v1/auth/login",
+      formFields
+    );
+    console.log(res);
     resetFormFields();
   };
 
