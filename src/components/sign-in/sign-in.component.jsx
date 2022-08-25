@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 const initialFormFields = {
   email: "",
@@ -16,6 +17,19 @@ export const SignInForm = () => {
     setFormFields(initialFormFields);
   };
 
+  const signInWithGoogle = async () => {
+    const res = await fetch("http://localhost:5000/api/v1/auth/google", {
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:5000",
+        "Access-Control-Allow-Credentials": true,
+      },
+    });
+    console.log("response", res);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,6 +38,11 @@ export const SignInForm = () => {
       formFields
     );
     console.log(res);
+    if (res.status === 200) {
+      console.log("Login successful");
+    } else {
+      console.log("Login failed");
+    }
     resetFormFields();
   };
 
@@ -55,8 +74,14 @@ export const SignInForm = () => {
           value={password}
         />
         <ButtonsContainer>
-          <button type="submit">Sign In</button>
-          <button type="button">Sign In With Google</button>
+          <Button type="submit">Sign In</Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type="button"
+            onClick={signInWithGoogle}
+          >
+            Sign In With Google
+          </Button>
         </ButtonsContainer>
       </form>
     </SignInContainer>

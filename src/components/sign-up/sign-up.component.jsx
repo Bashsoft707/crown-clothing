@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
+import Button from "../button/button.component";
 import { SignUpContainer } from "./sign-up.styles";
+import { UserContext } from "../../context/userContext";
 
 const initialFormFields = {
   name: "",
@@ -10,6 +12,7 @@ const initialFormFields = {
 };
 
 export const SignUpForm = () => {
+  const { setCurrentUser } = useContext(UserContext);
   const [formFields, setFormFields] = React.useState(initialFormFields);
   const { name, email, password } = formFields;
 
@@ -19,12 +22,19 @@ export const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    resetFormFields();
+
     const res = await axios.post(
       "http://localhost:5000/api/v1/auth/register",
       formFields
     );
-    console.log(res)
+    console.log(res);
+    if (res.status === 200) {
+      console.log("success");
+    } else {
+      console.log("failed");
+    }
+    setCurrentUser(res.data);
+    resetFormFields();
   };
 
   const handleChange = (event) => {
@@ -62,7 +72,7 @@ export const SignUpForm = () => {
           name="password"
           value={password}
         />
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </SignUpContainer>
   );
