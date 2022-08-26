@@ -8,10 +8,17 @@ import {
 } from "./navigation.styles";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { UserContext } from "../../context/userContext";
+import { CartContext } from "../../context/cartContext";
+import axios from "axios";
+import { CartIcon } from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 export const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { isCartOpen } = useContext(CartContext);
+
+  const signOutUser = async () =>
+    await axios.get("http://localhost:5000/api/v1/auth/logout");
 
   return (
     <Fragment>
@@ -22,11 +29,15 @@ export const Navigation = () => {
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <NavLink as="span">SIGN OUT</NavLink>
+            <NavLink as="span" onClick={signOutUser}>
+              SIGN OUT
+            </NavLink>
           ) : (
             <NavLink to="/auth">SIGN IN</NavLink>
           )}
+          <CartIcon />
         </NavLinks>
+        {isCartOpen && <CartDropdown />}
       </NavigationContainer>
       <Outlet />
     </Fragment>
