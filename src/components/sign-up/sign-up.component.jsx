@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { SignUpContainer } from "./sign-up.styles";
-import { UserContext } from "../../context/userContext";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user-action";
 
 const initialFormFields = {
   name: "",
@@ -12,9 +13,10 @@ const initialFormFields = {
 };
 
 export const SignUpForm = () => {
-  const { setCurrentUser } = useContext(UserContext);
   const [formFields, setFormFields] = React.useState(initialFormFields);
   const { name, email, password } = formFields;
+
+  const dispatch = useDispatch();
 
   const resetFormFields = () => {
     setFormFields(initialFormFields);
@@ -27,9 +29,9 @@ export const SignUpForm = () => {
       "http://localhost:5000/api/v1/auth/register",
       formFields
     );
-    console.log(res);
     if (res.status === 200) {
       console.log("success");
+      dispatch(setCurrentUser(res.data));
     } else {
       console.log("failed");
     }

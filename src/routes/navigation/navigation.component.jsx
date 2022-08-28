@@ -7,14 +7,15 @@ import {
   LogoContainer,
 } from "./navigation.styles";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { UserContext } from "../../context/userContext";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user-select";
 import { CartContext } from "../../context/cartContext";
 import axios from "axios";
 import { CartIcon } from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 export const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   const signOutUser = async () =>

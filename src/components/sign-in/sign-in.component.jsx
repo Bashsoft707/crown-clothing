@@ -3,7 +3,8 @@ import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { UserContext } from "../../context/userContext";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user-action";
 
 const initialFormFields = {
   email: "",
@@ -11,9 +12,10 @@ const initialFormFields = {
 };
 
 export const SignInForm = () => {
-  const { setCurrentUser } = React.useContext(UserContext);
   const [formFields, setFormFields] = React.useState(initialFormFields);
   const { email, password } = formFields;
+
+  const dispatch = useDispatch();
 
   const resetFormFields = () => {
     setFormFields(initialFormFields);
@@ -39,10 +41,9 @@ export const SignInForm = () => {
       "http://localhost:5000/api/v1/auth/login",
       formFields
     );
-    console.log(res);
     if (res.status === 200) {
       console.log("Login successful");
-      setCurrentUser(res.data.token);
+      dispatch(setCurrentUser(res.data));
     } else {
       console.log("Login failed");
     }
