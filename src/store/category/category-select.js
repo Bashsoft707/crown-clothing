@@ -6,3 +6,8 @@ export const selectCategory = createSelector(
   [selectCategoryMap],
   (category) => category.categoryMap
 );
+
+export const selectIsCategoryLoading = createSelector(
+  [selectCategoryMap],
+  (category) => category.isLoading
+)

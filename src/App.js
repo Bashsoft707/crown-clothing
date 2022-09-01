@@ -6,13 +6,13 @@ import { Navigation } from "./routes/navigation/navigation.component";
 import { Authentication } from "./routes/authentication/authentication.component";
 import { Checkout } from "./routes/checkout/checkout.component";
 import { useDispatch } from "react-redux";
-import { setCategoryMap } from "./store/category/category-action";
-import { SHOP_DATA } from "./shop-data";
+import { fetchCategoriesAsync } from "./store/category/category-action";
 
 const App = () => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
-    dispatch(setCategoryMap(SHOP_DATA));
+    dispatch(fetchCategoriesAsync());
   }, [dispatch]);
 
   return (
