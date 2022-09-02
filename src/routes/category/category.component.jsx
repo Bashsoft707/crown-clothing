@@ -30,8 +30,8 @@ export const Category = () => {
       ) : (
         <CategoryContainer>
           {products &&
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            products.map((product, index) => (
+              <ProductCard key={index} product={product} />
             ))}
         </CategoryContainer>
       )}

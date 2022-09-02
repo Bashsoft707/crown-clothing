@@ -23,12 +23,7 @@ export const fetchCategoriesAsync = () => {
       const response = await axios.get(
         "http://localhost:5000/api/v1/categories"
       );
-      const collections = response.data.reduce((acc, data) => {
-        const { title, items } = data;
-        acc[title] = items;
-        return acc;
-      }, {});
-      await dispatch(fetchCategoriesSuccess(collections));
+      await dispatch(fetchCategoriesSuccess(response.data.data));
     } catch (error) {
       dispatch(fetchCategoriesFailure(error));
     }

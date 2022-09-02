@@ -16,6 +16,7 @@ export const Directory = () => {
       {isLoading ? (
         <Spinner />
       ) : (
+        categories &&
         categories.map((category, index) => (
           <DirectoryItem
             key={index}
