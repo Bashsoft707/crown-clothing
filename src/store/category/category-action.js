@@ -1,4 +1,4 @@
-import { SHOP_DATA } from "../../shop-data";
+import axios from "axios";
 import { createAction } from "../../utils/create-action";
 
 export const CATEGORY_ACTION = {
@@ -20,7 +20,15 @@ export const fetchCategoriesAsync = () => {
   return async (dispatch) => {
     dispatch(fetchCategoriesStart());
     try {
-      await dispatch(fetchCategoriesSuccess(SHOP_DATA));
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/categories"
+      );
+      const collections = response.data.reduce((acc, data) => {
+        const { title, items } = data;
+        acc[title] = items;
+        return acc;
+      }, {});
+      await dispatch(fetchCategoriesSuccess(collections));
     } catch (error) {
       dispatch(fetchCategoriesFailure(error));
     }
