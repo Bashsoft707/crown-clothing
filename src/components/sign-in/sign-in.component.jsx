@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { Button, BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../store/user/user-action";
 

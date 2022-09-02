@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { FormInput } from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import { Button } from "../button/button.component";
 import { SignUpContainer } from "./sign-up.styles";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../store/user/user-action";

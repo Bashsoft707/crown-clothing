@@ -10,7 +10,7 @@ import { fetchCategoriesAsync } from "./store/category/category-action";
 
 const App = () => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchCategoriesAsync());
   }, [dispatch]);
