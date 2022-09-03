@@ -5,11 +5,11 @@ import {
   DirectoryItemContainer,
 } from "./directory.styles";
 
-export const DirectoryItem = ({ category }) => {
-  const { imageUrl, title, route } = category;
+export const DirectoryItem = ({ category, title }) => {
+  const { imageUrl } = category;
   const navigate = useNavigate();
 
-  const onNavigateHandler = () => navigate(route);
+  const onNavigateHandler = () => navigate(`/shop/${title.toLowerCase()}`);
 
   return (
     <DirectoryItemContainer onClick={onNavigateHandler}>

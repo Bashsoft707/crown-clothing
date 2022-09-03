@@ -1,9 +1,11 @@
 import React from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FormInput } from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { UserContext } from "../../context/userContext";
+import { Button, BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSignInAsync } from "../../store/user/user-action";
+import { selectCartItems } from "../../store/cart/cart-select";
 
 const initialFormFields = {
   email: "",
@@ -11,9 +13,12 @@ const initialFormFields = {
 };
 
 export const SignInForm = () => {
-  const { setCurrentUser } = React.useContext(UserContext);
   const [formFields, setFormFields] = React.useState(initialFormFields);
   const { email, password } = formFields;
+  const cartItems = useSelector(selectCartItems);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const resetFormFields = () => {
     setFormFields(initialFormFields);
@@ -35,16 +40,12 @@ export const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post(
-      "http://localhost:5000/api/v1/auth/login",
-      formFields
-    );
-    console.log(res);
-    if (res.status === 200) {
-      console.log("Login successful");
-      setCurrentUser(res.data.token);
+    await dispatch(fetchSignInAsync(email, password));
+
+    if (cartItems) {
+      navigate("/checkout");
     } else {
-      console.log("Login failed");
+      navigate("/shop");
     }
     resetFormFields();
   };
