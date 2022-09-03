@@ -19,7 +19,7 @@ const composer = composeEnhancer(applyMiddleware(...middleware));
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"],
+  whitelist: ["user", "cart"],
 };
 
 const persistEnhancer = persistReducer(persistConfig, rootReducer);

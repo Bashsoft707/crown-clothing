@@ -1,10 +1,11 @@
 import React from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FormInput } from "../form-input/form-input.component";
 import { Button } from "../button/button.component";
 import { SignUpContainer } from "./sign-up.styles";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../store/user/user-action";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSignUpAsync } from "../../store/user/user-action";
+import { selectCartItems } from "../../store/cart/cart-select";
 
 const initialFormFields = {
   name: "",
@@ -15,6 +16,8 @@ const initialFormFields = {
 export const SignUpForm = () => {
   const [formFields, setFormFields] = React.useState(initialFormFields);
   const { name, email, password } = formFields;
+  const cartItems = useSelector(selectCartItems);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -25,23 +28,18 @@ export const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post(
-      "http://localhost:5000/api/v1/auth/register",
-      formFields
-    );
-    if (res.status === 200) {
-      console.log("success");
-      dispatch(setCurrentUser(res.data));
+    await dispatch(fetchSignUpAsync(name, email, password));
+
+    if (cartItems) {
+      navigate("/checkout");
     } else {
-      console.log("failed");
+      navigate("/shop");
     }
-    setCurrentUser(res.data);
     resetFormFields();
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 

@@ -8,12 +8,15 @@ import {
   CartItems,
 } from "./cart-dropdown.styles";
 import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user-select";
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
+  const currentUser = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
-  const goToCheckoutPage = () => navigate("/checkout");
+  const goToCheckoutPage = () =>
+    currentUser ? navigate("/checkout") : navigate("/auth");
 
   return (
     <CartDropdownContainer>
