@@ -14,7 +14,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { selectIsCartOpen } from "../../store/cart/cart-select";
 import { fetchSignOutAsync } from "../../store/user/user-action";
 
-export const Navigation = () => {
+const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
 
@@ -45,3 +45,5 @@ export const Navigation = () => {
     </Fragment>
   );
 };
+
+export default Navigation;

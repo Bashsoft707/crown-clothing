@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import {
   selectIsCartOpen,
@@ -8,7 +8,7 @@ import { setIsCartOpen } from "../../store/cart/cart-action";
 import { CartIconContainer, ItemCount } from "./cart-icon.styles";
 import { useSelector, useDispatch } from "react-redux";
 
-export const CartIcon = () => {
+export const CartIcon = memo(() => {
   const isCartOpen = useSelector(selectIsCartOpen);
   const cartItemCount = useSelector(selectCartCount);
 
@@ -21,4 +21,4 @@ export const CartIcon = () => {
       <ItemCount>{cartItemCount}</ItemCount>
     </CartIconContainer>
   );
-};
+});

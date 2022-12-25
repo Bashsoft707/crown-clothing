@@ -21,7 +21,7 @@ export const fetchCategoriesAsync = () => {
     dispatch(fetchCategoriesStart());
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/categories"
+        "https://crown-clothing-backend.onrender.com/api/v1/categories"
       );
       await dispatch(fetchCategoriesSuccess(response.data.data));
     } catch (error) {

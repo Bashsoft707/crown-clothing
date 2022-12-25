@@ -47,7 +47,7 @@ export const fetchSignInAsync = (email, password) => {
     dispatch(fetchSignInStart());
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "https://crown-clothing-backend.onrender.com/api/v1/auth/login",
         formFields
       );
       await dispatch(fetchSignInSuccess(res.data));
@@ -68,7 +68,7 @@ export const fetchSignUpAsync = (name, email, password) => {
     dispatch(fetchSignUpStart());
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
+        "https://crown-clothing-backend.onrender.com/api/v1/auth/register",
         formFields
       );
       await dispatch(fetchSignUpSuccess(res.data));
@@ -82,7 +82,7 @@ export const fetchSignOutAsync = () => {
   return async (dispatch) => {
     dispatch(fetchSignOutStart());
     try {
-      await axios.get("http://localhost:5000/api/v1/auth/logout");
+      await axios.get("https://crown-clothing-backend.onrender.com/api/v1/auth/logout");
       await dispatch(fetchSignOutSuccess(null));
     } catch (err) {
       dispatch(fetchSignOutFailed(err));

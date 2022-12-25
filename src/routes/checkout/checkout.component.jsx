@@ -10,8 +10,9 @@ import {
 import { PaymentForm } from "../../components/payment-form/payment-form.component";
 import { selectCurrentUser } from "../../store/user/user-select";
 import { Navigate } from "react-router-dom";
+import { memo } from "react";
 
-export const Checkout = () => {
+const Checkout = memo(() => {
   const cartItems = useSelector(selectCartItems);
   const cartItemTotal = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
@@ -44,4 +45,6 @@ export const Checkout = () => {
   ) : (
     <Navigate to={{ pathname: "/auth" }} />
   );
-};
+});
+
+export default Checkout;

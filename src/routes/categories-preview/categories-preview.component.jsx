@@ -31,3 +31,5 @@ export const CategoriesPreview = () => {
     </Fragment>
   );
 };
+
+export default CategoriesPreview;
