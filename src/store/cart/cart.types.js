@@ -1,0 +1,13 @@
+// const CartActionTypes = {
+//   TOGGLE_CART_HIDDEN: "TOGGLE_CART_HIDDEN",
+//   ADD_ITEM: "ADD_ITEM",
+//   REMOVE_ITEM: "REMOVE_ITEM",
+//   CLEAR_ITEM_FROM_CART: "CLEAR_ITEM_FROM_CART",
+// };
+
+// export default CartActionTypes;
+
+export const CART_ACTION_TYPES = {
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN"
+}

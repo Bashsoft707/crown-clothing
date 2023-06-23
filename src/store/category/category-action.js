@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAction } from "../../utils/create-action";
+import { baseUrl } from "../../constant";
 
 export const CATEGORY_ACTION = {
   FETCH_CATEGORIES_START: "category/FETCH_CATEGORIES_START",
@@ -20,9 +21,7 @@ export const fetchCategoriesAsync = () => {
   return async (dispatch) => {
     dispatch(fetchCategoriesStart());
     try {
-      const response = await axios.get(
-        "https://crown-clothing-backend.onrender.com/api/v1/categories"
-      );
+      const response = await axios.get(`${baseUrl}/api/v1/categories`);
       await dispatch(fetchCategoriesSuccess(response.data.data));
     } catch (error) {
       dispatch(fetchCategoriesFailure(error));

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../constant";
 import { createAction } from "../../utils/create-action";
 import axios from "axios";
 
@@ -46,10 +47,7 @@ export const fetchSignInAsync = (email, password) => {
   return async (dispatch) => {
     dispatch(fetchSignInStart());
     try {
-      const res = await axios.post(
-        "https://crown-clothing-backend.onrender.com/api/v1/auth/login",
-        formFields
-      );
+      const res = await axios.post(`${baseUrl}/api/v1/auth/login`, formFields);
       await dispatch(fetchSignInSuccess(res.data));
     } catch (err) {
       dispatch(fetchSignInFailed(err));
@@ -68,7 +66,7 @@ export const fetchSignUpAsync = (name, email, password) => {
     dispatch(fetchSignUpStart());
     try {
       const res = await axios.post(
-        "https://crown-clothing-backend.onrender.com/api/v1/auth/register",
+        `${baseUrl}/api/v1/auth/register`,
         formFields
       );
       await dispatch(fetchSignUpSuccess(res.data));
@@ -82,7 +80,7 @@ export const fetchSignOutAsync = () => {
   return async (dispatch) => {
     dispatch(fetchSignOutStart());
     try {
-      await axios.get("https://crown-clothing-backend.onrender.com/api/v1/auth/logout");
+      await axios.get(`${baseUrl}/api/v1/auth/logout`);
       await dispatch(fetchSignOutSuccess(null));
     } catch (err) {
       dispatch(fetchSignOutFailed(err));

@@ -17,9 +17,9 @@ import { selectCartItems } from "../../store/cart/cart-select";
 
 const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
+  const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
 
-  const dispatch = useDispatch();
   const clearItemHandler = () =>
     dispatch(clearItemFromCart(cartItems, cartItem));
   const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
