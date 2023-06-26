@@ -8,12 +8,12 @@ export const CART_ACTIONS = {
 // <-- Helper functions -->
 const addItem = (cartItems, productToAdd) => {
   const existingItem = cartItems.find(
-    (cartItem) => cartItem.id === productToAdd.id
+    (cartItem) => cartItem._id === productToAdd._id
   );
 
   if (existingItem) {
     return cartItems.map((cartItem) =>
-      cartItem.id === productToAdd.id
+      cartItem._id === productToAdd._id
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
@@ -57,4 +57,5 @@ export const clearItemFromCart = (cartItems, productToClear) => {
   return createAction(CART_ACTIONS.SET_CART_ITEMS, newCartItems);
 };
 
-export const setIsCartOpen = bool => createAction(CART_ACTIONS.TOGGLE_CART_OPEN, bool)
+export const setIsCartOpen = (bool) =>
+  createAction(CART_ACTIONS.TOGGLE_CART_OPEN, bool);

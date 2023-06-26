@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
 const middleware =
-  process.env.NODE_ENV !== "production" && [logger, thunk].filter(Boolean);
+  process.env.NODE_ENV !== "production" && [thunk].filter(Boolean);
 
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&

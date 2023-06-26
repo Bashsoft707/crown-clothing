@@ -1,0 +1,1 @@
+export const baseUrl = "https://crown-clothing-backend.onrender.com/api/v1"
